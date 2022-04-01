@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('telephone')->unique();
+            $table->integer('cni')->unique()->nullable(false);
+            $table->string('profil')->nullable(false)->default('anonymous');
             $table->rememberToken();
             $table->timestamps();
         });

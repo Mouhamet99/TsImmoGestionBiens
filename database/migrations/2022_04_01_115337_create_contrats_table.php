@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('contrats', function (Blueprint $table) {
             $table->id();
-            $table->int('duree');
+            $table->integer('duree');
             $table->dateTime('date_debut');
             $table->timestamps();
             $table->foreignId('type_contrat_id')->constrained('type_contrats');
             $table->foreignId('proprietaire_id')->constrained('proprietaires');
-            $table->foreignId('propriete_id')->constrained('proprietes');
 
         });
     }

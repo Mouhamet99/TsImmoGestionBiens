@@ -67,7 +67,10 @@ class ProprietaireController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return view('proprietaires.edit', [
+            'proprietaire' => Proprietaire::find($id),
+        ]);
     }
 
     /**
@@ -79,7 +82,20 @@ class ProprietaireController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'nom' => 'required',
+            'prenom' => 'required',
+            'cni' => 'required|regex:/[0-9]{10}/',
+            'email' => 'required|email',
+            'sexe' => 'required',
+        );
+        $request->validate($rules);
+
+        $propietaire = $request->all();
+        $propietaire = array_splice($propietaire,2);
+
+        Proprietaire::where('id',$id)->update($propietaire);
+        return redirect('proprietaires');
     }
 
     /**

@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('email')->unique()->nullable(false);
             $table->string('telephone')->unique();
             $table->enum('sexe', ['m', 'f']);
+
             $table->timestamps();
         });
     }

@@ -7,21 +7,24 @@
 <body>
 <div class="container">
 
-<nav class="navbar navbar-inverse">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="{{ URL::to('proprietaires') }}">TS IMMO</a>
-    </div>
-    <ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('proprietaires') }}">Liste des proprietaires</a></li>
-        <li><a href="{{ URL::to('proprietaires/create') }}">Nouveau proprieataire</a>
-    </ul>
-</nav>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ URL::to('proprietaires') }}">TS IMMO</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="{{ URL::to('proprietaires') }}">Liste des proprietaires</a></li>
+            <li><a href="{{ URL::to('proprietaires/create') }}">Nouveau proprieataire</a>
 
-<h1>Creation d'un nouveau proprieataire</h1>
+            <li><a href="{{ URL::to('proprietes') }}">Liste des proprietes</a></li>
+            <li><a href="{{ URL::to('proprietes/create') }}">Nouvelle propriete</a>
+        </ul>
+    </nav>
 
-<!-- if there are creation errors, they will show here -->
-{{ HTML::ul($errors->all()) }}
-{{ Form::open(array('url' => 'proprietaires')) }}
+    <h1>Creation d'un nouveau proprieataire</h1>
+
+    <!-- if there are creation errors, they will show here -->
+    {{ HTML::ul($errors->all()) }}
+    {{ Form::open(array('url' => 'proprietaires')) }}
     <div class="form-group">
         {{ Form::label('email', 'Email') }}
         {{ Form::email('email', old('email'), array('class' => 'form-control')) }}
@@ -50,7 +53,7 @@
 
     {{ Form::submit('Enregistrer', array('class' => 'btn btn-primary')) }}
 
-{{ Form::close() }}
+    {{ Form::close() }}
 
 </div>
 </body>

@@ -18,6 +18,10 @@ class Proprietaire extends Model
         'cni' => 'integer'
     ];
     protected $guarded = ['id'];
+    protected $with = ['proprietes'];
 
+    public function proprietes(){
+        return $this->hasMany(Propriete::class);
+    }
 
 }

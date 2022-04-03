@@ -66,11 +66,11 @@
                 <td>{{ $value->proprietaire->nom }}</td>
 
                 <td>
-                    <a class="btn btn-small btn-success" href="{{ URL::to('proprietes/' . $value->id) }}">Voir</a>
-                    <a class="btn btn-small btn-info"
+                    <a class="btn btn-sm btn-info" href="{{ URL::to('proprietes/' . $value->id) }}">Voir</a>
+                    <a class="btn btn-sm btn-warning"
                        href="{{ URL::to('proprietes/' . $value->id . '/edit') }}">Editer</a>
                     {{Form::open(['url'=>'proprietes/' . $value->id,'method' => 'delete','class'=>'d-inline'])}}
-                    {{Form::submit('Supprimer',['class'=>'btn btn-small btn-danger'])}}
+                    {{Form::submit('Supprimer',['class'=>'btn btn-sm btn-danger'])}}
                     {{Form::close()}}
                 </td>
             </tr>

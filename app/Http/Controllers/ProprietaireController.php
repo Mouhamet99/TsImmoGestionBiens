@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proprietaire;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
 
 class ProprietaireController extends Controller
 {
@@ -13,7 +13,7 @@ class ProprietaireController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index() : View
     {
         $proprietaires = Proprietaire::all();
         return view('proprietaires.index', ['proprietaires' => $proprietaires]);
@@ -23,7 +23,7 @@ class ProprietaireController extends Controller
      * Show the form for creating a new resource.
      *
      */
-    public function create()
+    public function create(): View
     {
         return view('proprietaires.create');
     }
@@ -33,7 +33,7 @@ class ProprietaireController extends Controller
      *
      * @param Request $request
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $rules = array(
             'nom' => 'required',
@@ -55,9 +55,9 @@ class ProprietaireController extends Controller
      *
      * @param int $id
      */
-    public function show($id)
+    public function show(int $id) : View
     {
-        //
+        return view('proprietaires.show',['proprietaire'=>Proprietaire::find($id)]);
     }
 
     /**
@@ -65,7 +65,7 @@ class ProprietaireController extends Controller
      *
      * @param int $id
      */
-    public function edit($id)
+    public function edit(int $id): View
     {
 
         return view('proprietaires.edit', [
@@ -78,9 +78,8 @@ class ProprietaireController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
         $rules = array(
             'nom' => 'required',
@@ -92,9 +91,9 @@ class ProprietaireController extends Controller
         $request->validate($rules);
 
         $propietaire = $request->all();
-        $propietaire = array_splice($propietaire,2);
+        $propietaire = array_splice($propietaire, 2);
 
-        Proprietaire::where('id',$id)->update($propietaire);
+        Proprietaire::where('id', $id)->update($propietaire);
         return redirect('proprietaires');
     }
 
@@ -102,10 +101,10 @@ class ProprietaireController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return Response
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        //
+        Proprietaire::destroy($id);
+        return redirect('proprietaires');
     }
 }

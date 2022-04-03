@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Proprietaires</title>
-   <!-- Fonts -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome Icon -->
@@ -47,35 +47,35 @@
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>shark Level</td>
-            <td>Actions</td>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>CNI</th>
+            <th>Tel</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($proprietaires as $key => $value)
             <tr>
                 <td>{{ $value->id }}</td>
-                <td>{{ $value->name }}</td>
-                <td>{{ $value->email }}</td>
-                <td>{{ $value->shark_level }}</td>
+                <td>{{ $value->nom }}</td>
+                <td>{{ $value->cni }}</td>
+                <td>{{ $value->telephone }}</td>
 
                 <!-- we will also add show, edit, and delete buttons -->
                 <td>
 
-                    <!-- delete the shark (uses the destroy method DESTROY /proprietaires/{id} -->
-                    <!-- we will add this later since its a little more complicated than the other two buttons -->
+                    <a class="btn btn-sm btn-info" href="{{ URL::to('proprietaires/' . $value->id) }}">Voir</a>
+                    <a class="btn btn-sm btn-warning" href="{{ URL::to('proprietaires/' . $value->id . '/edit') }}">Editer</a>
+                    {{--                    {{Form::open(['route'=> ['proprietaires.destroy',$value->id], 'method'=>'DELETE', 'class'=>'d-inline'] )}}--}}
+                    {{--                    {{Form::open(['url'=>'proprietaires/',$value->id, 'method'=>'delete','class'=>'d-inline'] )}}--}}
+                    {{--                    {{ Form::hidden('_method', 'DELETE') }}--}}
 
-                    <!-- show the shark (uses the show method found at GET /proprietaires/{id} -->
-                    <a class="btn btn-small btn-success" href="{{ URL::to('proprietaires/' . $value->id) }}">Show this
-                        shark</a>
-
-                    <!-- edit this shark (uses the edit method found at GET /proprietaires/{id}/edit -->
-                    <a class="btn btn-small btn-info" href="{{ URL::to('proprietaires/' . $value->id . '/edit') }}">Edit this
-                        shark</a>
-
+                    {{--                    {{Form::submit('Supprimer',['class'=>'btn btn-sm btn-danger'])}}--}}
+                    {{--                    {{Form::close()}}--}}
+                    {{Form::open(['url'=>'proprietaires/' . $value->id,'method' => 'delete','class'=>'d-inline'])}}
+                    {{Form::submit('Supprimer',['class'=>'btn btn-sm btn-danger'])}}
+                    {{Form::close()}}
                 </td>
             </tr>
         @endforeach

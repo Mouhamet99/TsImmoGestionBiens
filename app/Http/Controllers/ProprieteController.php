@@ -123,6 +123,7 @@ class ProprieteController extends Controller
      */
     public function destroy($id)
     {
-        //
+         Propriete::destroy($id);
+        return redirect('proprietes');
     }
 }

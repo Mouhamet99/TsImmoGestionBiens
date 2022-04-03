@@ -16,8 +16,9 @@ class ProprieteController extends Controller
      */
     public function index()
     {
-        return view('proprietes.index',[
-        'proprietes'=> Propriete::with('proprietaire')->get()
+
+        return view('proprietes.index', [
+            'proprietes' => Propriete::with('proprietaire')->get()
         ]);
     }
 
@@ -28,21 +29,21 @@ class ProprieteController extends Controller
     public function create()
     {
 
-        return view('proprietes.create',[
+        return view('proprietes.create', [
             'proprietaires' => Proprietaire::all(),
             'quartiers' => Quartier::all(),
-            'type_proprietes'=> TypePropriete::all(),
+            'type_proprietes' => TypePropriete::all(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param Request $request
      */
     public function store(Request $request)
     {
-          $rules = array(
+        $rules = array(
             'nom' => 'required',
             'superficie' => 'required',
             'nombre_etages' => 'required|numeric',
@@ -62,7 +63,7 @@ class ProprieteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      */
     public function show($id)
     {
@@ -72,31 +73,53 @@ class ProprieteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
      */
     public function edit($id)
     {
-        //
+        $propriete = Propriete::find($id);
+
+        return view('proprietes.edit', [
+            'propriete' => $propriete,
+            'proprietaires' => Proprietaire::all(),
+            'quartiers' => Quartier::all(),
+            'type_proprietes' => TypePropriete::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $rules = array(
+            'nom' => 'required',
+            'superficie' => 'required',
+            'nombre_etages' => 'required|numeric',
+            'montant' => 'required|numeric',
+            'adresse' => 'required',
+            'quartier_id' => 'required',
+            'proprietaire_id' => 'required',
+            'type_propriete_id' => 'required',
+        );
+        $request->validate($rules);
+
+        $propriete = $request->all();
+        $propriete = array_splice($propriete, 2);
+
+        Propriete::where('id', $id)->update($propriete);
+
+        return redirect('proprietes');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
      */
     public function destroy($id)
     {

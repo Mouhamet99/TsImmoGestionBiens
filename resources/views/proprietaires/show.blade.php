@@ -14,23 +14,29 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
 <div class="container">
 
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ URL::to('proprietaires') }}">TS IMMO</a>
+    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg mb-4 mt-2">
+        <div class="container-fluid">
+            <a class="navbar-brand " href="{{ URL::to('proprietes') }}">TS IMMO</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::to('proprietaires') }}">Liste propretaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::to('proprietes') }}">Liste proprietes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::to('proprietaires/create') }}">Nouveau propretaire</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ URL::to('proprietes/create') }}">Nouveau propriete</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <ul class="nav navbar-nav">
-            <li><a href="{{ URL::to('proprietaires') }}">Liste des proprietaires</a></li>
-            <li><a href="{{ URL::to('proprietaires/create') }}">Nouveau proprieataire</a>
-
-            <li><a href="{{ URL::to('proprietes') }}">Liste des proprietes</a></li>
-            <li><a href="{{ URL::to('proprietes/create') }}">Nouvelle propriete</a>
-        </ul>
     </nav>
-
-
     <!-- will be used to show any messages -->
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
@@ -46,7 +52,42 @@
             <strong>Proprietes</strong> {{ $proprietaire->proprietes->count() }}
         </p>
     </div>
-
+    <div class="container mt-5 mb-5">
+        <div class="row g-2">
+            <div class="col-md-6">
+                <div class="card bg-white p-3 px-4 d-flex justify-content-center">
+                    <h5 class="mb-0">Standard Plan</h5> <span class="price">$19/month</span>
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between align-items-center"><span>All features</span> <span>1 Minute trigger</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center"><span>5000 interactions</span>
+                            <span>Remove branding</span></div>
+                        <div class="d-flex justify-content-between align-items-center"><span>15 bots</span> <span>Priority support</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-danger">Start Free</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="d-flex flex-column">
+                        <div class="pricing-1 d-flex justify-content-between">
+                            <div><span class="d-block">Add 5 bots or active flow</span> <span class="font-weight-bold">+ $10/month</span>
+                            </div>
+                            <div class="circle"><span></span> <span></span> <span></span> <span></span></div>
+                        </div>
+                        <div class="pricing-1 d-flex justify-content-between">
+                            <div><span class="d-block">Add 8 bots or active flow</span> <span class="font-weight-bold">+ $20/month</span>
+                            </div>
+                            <div class="circle"><span></span> <span></span> <span></span> <span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

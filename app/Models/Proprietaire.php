@@ -23,5 +23,8 @@ class Proprietaire extends Model
     public function proprietes(){
         return $this->hasMany(Propriete::class);
     }
+    public function contrats(){
+        return $this->hasMany(Contrat::class,);
+    }
 
 }

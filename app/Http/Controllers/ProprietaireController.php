@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrat;
 use App\Models\Proprietaire;
+use App\Models\TypeContrat;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use function GuzzleHttp\Promise\all;
 
 class ProprietaireController extends Controller
 {
@@ -26,7 +29,9 @@ class ProprietaireController extends Controller
      */
     public function create(): View
     {
-        return view('proprietaires.create');
+        return view('proprietaires.create', [
+            'type_contrats' => TypeContrat::all()
+        ]);
     }
 
     /**
@@ -34,7 +39,7 @@ class ProprietaireController extends Controller
      *
      * @param Request $request
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $rules = array(
             'nom' => 'required',
@@ -45,7 +50,10 @@ class ProprietaireController extends Controller
         );
         $request->validate($rules);
 
-        Proprietaire::create($request->all());
+        $proprietaire = Proprietaire::create($request->all());
+
+        $request->request->add(['proprietaire_id' => $proprietaire->id]);
+        Contrat::create($request->all());
 
         Session::flash('message', 'Proprietaire ajouté avec success!');
 
@@ -75,6 +83,7 @@ class ProprietaireController extends Controller
 
         return view('proprietaires.edit', [
             'proprietaire' => Proprietaire::find($id),
+            'type_contrats' => TypeContrat::all(),
         ]);
     }
 
@@ -95,10 +104,8 @@ class ProprietaireController extends Controller
         );
         $request->validate($rules);
 
-        $propietaire = $request->all();
-        $propietaire = array_splice($propietaire, 2);
+        Proprietaire::find($id)->update($request->all());
 
-        Proprietaire::where('id', $id)->update($propietaire);
         return redirect('proprietaires');
     }
 

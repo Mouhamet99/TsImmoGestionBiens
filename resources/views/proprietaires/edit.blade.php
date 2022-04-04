@@ -52,18 +52,6 @@
         {{ Form::select('sexe', array('0' => 'Selectionner une option', 'm' => 'Masculin', 'f' => 'Feminin'), old('sexe'), array('class' => 'form-control')) }}
     </div>
 
-    {{--    <div class="form-group">--}}
-    {{--        {{ Form::label('proprietaire_id', 'Proprietaire') }}--}}
-    {{--        <select name="proprietaire_id" required class="form-control form-select mt-3">--}}
-    {{--            <option value="">Selectionner le Propretaire</option>--}}
-    {{--            @foreach($proprietaires as $proprietaire)--}}
-    {{--                <option--}}
-    {{--                    value="{{ $proprietaire->id }}" {{$proprietaire->id === $propriete->proprietaire_id? "selected":""}}>--}}
-    {{--                    {{ $proprietaire->nom }}--}}
-    {{--                </option>--}}
-    {{--            @endforeach--}}
-    {{--        </select>--}}
-    {{--    </div>--}}
     {{ Form::submit('Enregistrer', array('class' => 'btn btn-primary')) }}
 
     {{ Form::close() }}

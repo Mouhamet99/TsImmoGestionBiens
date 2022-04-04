@@ -14,14 +14,21 @@ return new class extends Migration {
     {
         Schema::create('proprietes', function (Blueprint $table) {
             $table->id();
-            $table->boolean("status");
+            $table->string('nom')->default('');
+
+            $table->boolean("status")->default(false);
             $table->integer("nombre_etages");
-            $table->string("superficie");
+            $table->integer("superficie");
             $table->string("adresse");
-            $table->integer("montant");
-            $table->foreignId('type_propriete_id')->constrained('type_proprietes');
-            $table->foreignId('contrat_id')->constrained('contrats');
-            $table->foreignId('quartier_id')->constrained('quartiers');
+            $table->foreignId('type_propriete_id')->constrained('type_proprietes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('quartier_id')->constrained('quartiers')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('proprietaire_id')->constrained('proprietaires')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

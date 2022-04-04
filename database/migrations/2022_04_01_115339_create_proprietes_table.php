@@ -20,7 +20,6 @@ return new class extends Migration {
             $table->integer("nombre_etages");
             $table->integer("superficie");
             $table->string("adresse");
-            $table->integer("montant");
             $table->foreignId('type_propriete_id')->constrained('type_proprietes')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

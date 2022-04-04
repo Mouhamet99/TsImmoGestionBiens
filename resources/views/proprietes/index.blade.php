@@ -49,23 +49,25 @@
         <thead>
         <tr>
             <th>ID</th>
+            <th>Libelle</th>
             <th>superfifie(m²)</th>
             <th>etage(s)</th>
-            <th>montant(FCFA)</th>
+            <th>addresse</th>
             <th>proprietaire</th>
-            <th>Actions</th>
+            <th class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($proprietes as $key => $value)
             <tr>
                 <td>{{ $value->id }}</td>
+                <td>{{ $value->nom }}</td>
                 <td>{{ $value->superficie }}</td>
                 <td>{{ $value->nombre_etages }}</td>
-                <td>{{ $value->montant }}</td>
+                <td>{{ $value->addresse }}</td>
                 <td>{{ $value->proprietaire->nom }}</td>
 
-                <td>
+                <td class="text-center">
                     <a class="btn btn-sm btn-info" href="{{ URL::to('proprietes/' . $value->id) }}">Voir</a>
                     <a class="btn btn-sm btn-warning"
                        href="{{ URL::to('proprietes/' . $value->id . '/edit') }}">Editer</a>

@@ -37,10 +37,6 @@
         {{ Form::text('adresse', old('adresse'), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('montant', 'Montant') }}
-        {{ Form::number('montant', old('montant'), array('class' => 'form-control')) }}
-    </div>
-    <div class="form-group">
         {{ Form::label('nombre_etages', 'Nombre d\'etages') }}
         {{ Form::number('nombre_etages', old('nombre_etages'), array('class' => 'form-control')) }}
     </div>

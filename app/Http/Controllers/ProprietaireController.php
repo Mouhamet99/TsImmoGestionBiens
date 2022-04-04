@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proprietaire;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class ProprietaireController extends Controller
@@ -13,7 +14,7 @@ class ProprietaireController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index() : View
+    public function index(): View
     {
         $proprietaires = Proprietaire::all();
         return view('proprietaires.index', ['proprietaires' => $proprietaires]);
@@ -46,6 +47,8 @@ class ProprietaireController extends Controller
 
         Proprietaire::create($request->all());
 
+        Session::flash('message', 'Proprietaire ajouté avec success!');
+
         return redirect('proprietaires');
 
     }
@@ -55,9 +58,11 @@ class ProprietaireController extends Controller
      *
      * @param int $id
      */
-    public function show(int $id) : View
+    public function show(int $id): View
     {
-        return view('proprietaires.show',['proprietaire'=>Proprietaire::find($id)]);
+        $propretaire = Proprietaire::find($id)->withCount('proprietes')->get()->first();
+
+        return view('proprietaires.show', ['proprietaire' => $propretaire]);
     }
 
     /**

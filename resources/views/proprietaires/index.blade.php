@@ -51,7 +51,7 @@
             <th>Nom</th>
             <th>CNI</th>
             <th>Tel</th>
-            <th>Actions</th>
+            <th class="text-base">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@
                 <td>{{ $value->telephone }}</td>
 
                 <!-- we will also add show, edit, and delete buttons -->
-                <td>
+                <td class="text-base">
 
                     <a class="btn btn-sm btn-info" href="{{ URL::to('proprietaires/' . $value->id) }}">Voir</a>
                     <a class="btn btn-sm btn-warning" href="{{ URL::to('proprietaires/' . $value->id . '/edit') }}">Editer</a>

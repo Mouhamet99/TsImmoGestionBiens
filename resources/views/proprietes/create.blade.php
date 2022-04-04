@@ -56,21 +56,15 @@
         {{ Form::text('adresse', old('adresse'), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('montant', 'Montant') }}
-        {{ Form::number('montant', old('montant'), array('class' => 'form-control')) }}
-    </div>
-    <div class="form-group">
         {{ Form::label('nombre_etages', 'Nombre d\'etages') }}
         {{ Form::number('nombre_etages', old('nombre_etages'), array('class' => 'form-control')) }}
     </div>
-
-
     <div class="form-group">
         {{ Form::label('proprietaire_id', 'Proprietaire') }}
         <select name="proprietaire_id" required class="form-control form-select mt-3">
             <option value="">Selectionner le Propretaire</option>
             @foreach($proprietaires as $proprietaire)
-                <option value="{{ $proprietaire->id }}">
+                <option value="{{ $proprietaire->id }}" {{old('proprietaire_id')=== $proprietaire->id? "selected":""}}>
                     {{ $proprietaire->nom }}
                 </option>
             @endforeach
@@ -82,7 +76,9 @@
         <select class="form-select mt-3 form-control" name="quartier_id" required>
             <option selected value="">Selectionner le quartier</option>
             @foreach ($quartiers as $quarter)
-                <option value="{{$quarter->id}}">{{$quarter->nom}} </option>
+                <option value="{{$quarter->id}}"  {{old('quarter_id')=== $quarter->id? "selected":""}}>
+                    {{$quarter->nom}}
+                </option>
             @endforeach
         </select>
     </div>
@@ -91,7 +87,9 @@
         <select class="form-select mt-3 form-control" name="type_propriete_id" required>
             <option selected value="">Selectionner le type de propriete</option>
             @foreach ($type_proprietes as $type)
-                <option value="{{$type->id}}">{{$type->libelle}} </option>
+                <option value="{{$type->id}}"  {{old('type_id')=== $type->id? "selected":""}}>
+                    {{$type->libelle}}
+                </option>
             @endforeach
         </select>
     </div>

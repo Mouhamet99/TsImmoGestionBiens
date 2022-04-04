@@ -30,7 +30,7 @@
         {{ Form::email('email', old('email'), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">
-        {{ Form::label('nom', 'Prenom') }}
+        {{ Form::label('nom', 'Nom') }}
         {{ Form::text('nom', old('nom'), array('class' => 'form-control')) }}
     </div>
     <div class="form-group">

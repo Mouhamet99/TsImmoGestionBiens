@@ -23,6 +23,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
-Route::resource('proprietaires', ProprietaireController::class);
-Route::resource('proprietes', ProprieteController::class);
+require __DIR__ . '/auth.php';
+
+Route::middleware('auth')->group(function () {
+    Route::resource('proprietaires', ProprietaireController::class);
+    Route::resource('proprietes', ProprieteController::class);
+
+    Route::withoutMiddleware('auth')->group(function () {
+        Route::get('/proprietes', [ProprieteController::class, 'index']);
+        Route::get('/proprietaires', [ProprietaireController::class, 'index']);
+    });
+});

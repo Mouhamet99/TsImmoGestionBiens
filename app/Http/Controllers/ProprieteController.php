@@ -66,7 +66,7 @@ class ProprieteController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('proprietes.show', ['propriete'=>Propriete::find($id)]);
     }
 
     /**

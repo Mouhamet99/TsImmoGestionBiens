@@ -21,10 +21,10 @@ class Propriete extends Model
         return $this->belongsTo(Proprietaire::class,"proprietaire_id");
     }
 //
-//    public function quartier()
-//    {
-//        return $this->belongsTo(Quartier::class);
-//    }
+    public function quartier()
+    {
+        return $this->belongsTo(Quartier::class);
+    }
 
 
 }

@@ -126,14 +126,6 @@
 
     <h1 class="text-center">Details</h1>
 
-    <div class="jumbotron text-center">
-{{--        <h2>{{ $proprietaire->nom }}</h2>--}}
-{{--        <p>--}}
-{{--            <strong>Email:</strong> {{ $proprietaire->email }}<br>--}}
-{{--            <strong>CNI:</strong> {{ $proprietaire->cni }}--}}
-{{--            <strong>Proprietes</strong> {{ $proprietaire->proprietes->count() }}--}}
-{{--        </p>--}}
-    </div>
     <div class="container mt-5 mb-5">
         <div class="row g-2 row-cols-2">
             <div class=" p-3 px-4">
@@ -166,10 +158,11 @@
                             <span>Email</span>
                             <span>{{ $proprietaire->email }}</span>
                         </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Adresse</span>
+                            <span>{{ $proprietaire->adresse }}</span>
+                        </div>
                     </div>
-{{--                    <div class="mt-4">--}}
-{{--                        <a  href="" class="btn btn-danger">Contacter</a>--}}
-{{--                    </div>--}}
                 </div>
             </div>
             <div class="">

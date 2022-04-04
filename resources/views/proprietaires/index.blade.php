@@ -49,9 +49,11 @@
         <tr>
             <th>ID</th>
             <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
             <th>CNI</th>
             <th>Tel</th>
-            <th class="text-base">Actions</th>
+            <th class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -59,20 +61,16 @@
             <tr>
                 <td>{{ $value->id }}</td>
                 <td>{{ $value->nom }}</td>
+                <td>{{ $value->prenom }}</td>
+                <td>{{ $value->email }}</td>
                 <td>{{ $value->cni }}</td>
                 <td>{{ $value->telephone }}</td>
 
                 <!-- we will also add show, edit, and delete buttons -->
-                <td class="text-base">
+                <td class="text-center">
 
                     <a class="btn btn-sm btn-info" href="{{ URL::to('proprietaires/' . $value->id) }}">Voir</a>
                     <a class="btn btn-sm btn-warning" href="{{ URL::to('proprietaires/' . $value->id . '/edit') }}">Editer</a>
-                    {{--                    {{Form::open(['route'=> ['proprietaires.destroy',$value->id], 'method'=>'DELETE', 'class'=>'d-inline'] )}}--}}
-                    {{--                    {{Form::open(['url'=>'proprietaires/',$value->id, 'method'=>'delete','class'=>'d-inline'] )}}--}}
-                    {{--                    {{ Form::hidden('_method', 'DELETE') }}--}}
-
-                    {{--                    {{Form::submit('Supprimer',['class'=>'btn btn-sm btn-danger'])}}--}}
-                    {{--                    {{Form::close()}}--}}
                     {{Form::open(['url'=>'proprietaires/' . $value->id,'method' => 'delete','class'=>'d-inline'])}}
                     {{Form::submit('Supprimer',['class'=>'btn btn-sm btn-danger'])}}
                     {{Form::close()}}

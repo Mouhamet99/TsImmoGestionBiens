@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Commune extends Model
 {
     use HasFactory;
+
+    protected $with = ['departement'];
+
+    public function departement()
+    {
+        return $this->belongsTo(Departement::class);
+    }
 }

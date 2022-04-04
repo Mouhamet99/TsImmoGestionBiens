@@ -13,6 +13,88 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+<style>
+    body {
+        background-color: #eee
+    }
+
+    .card {
+        border: none;
+        min-height: 300px;
+        background-color: transparent
+    }
+
+    .bg-white {
+        background-color: #fff
+    }
+
+    .price {
+        font-size: 35px;
+        color: #6a5ae7;
+        font-weight: 600
+    }
+
+    .pricing-1 {
+        background-color: #6f5fe8;
+        height: 145px;
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        padding: 15px;
+        color: #fff;
+        position: relative
+    }
+
+    .pricing-2 {
+        background-color: #6f5fe8;
+        height: 145px;
+        width: 100%;
+        border-radius: 4px
+    }
+
+    .circle span:nth-child(1) {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: white;
+        position: absolute;
+        right: 4px;
+        opacity: 0.3
+    }
+
+    .circle span:nth-child(2) {
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+        background-color: white;
+        position: absolute;
+        right: 60px;
+        top: 50px;
+        opacity: 0.3
+    }
+
+    .circle span:nth-child(3) {
+        height: 90px;
+        width: 90px;
+        border-radius: 50%;
+        background-color: white;
+        position: absolute;
+        right: 150px;
+        top: 30px;
+        opacity: 0.3
+    }
+
+    .circle span:nth-child(4) {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        background-color: white;
+        position: absolute;
+        right: 10px;
+        top: 100px;
+        opacity: 0.3
+    }
+</style>
 <body>
 <div class="container">
 
@@ -45,41 +127,61 @@
     <h1 class="text-center">Details</h1>
 
     <div class="jumbotron text-center">
-        <h2>{{ $proprietaire->nom }}</h2>
-        <p>
-            <strong>Email:</strong> {{ $proprietaire->email }}<br>
-            <strong>CNI:</strong> {{ $proprietaire->cni }}
-            <strong>Proprietes</strong> {{ $proprietaire->proprietes->count() }}
-        </p>
+{{--        <h2>{{ $proprietaire->nom }}</h2>--}}
+{{--        <p>--}}
+{{--            <strong>Email:</strong> {{ $proprietaire->email }}<br>--}}
+{{--            <strong>CNI:</strong> {{ $proprietaire->cni }}--}}
+{{--            <strong>Proprietes</strong> {{ $proprietaire->proprietes->count() }}--}}
+{{--        </p>--}}
     </div>
     <div class="container mt-5 mb-5">
-        <div class="row g-2">
-            <div class="col-md-6">
-                <div class="card bg-white p-3 px-4 d-flex justify-content-center">
-                    <h5 class="mb-0">Standard Plan</h5> <span class="price">$19/month</span>
+        <div class="row g-2 row-cols-2">
+            <div class=" p-3 px-4">
+                <div class="card bg-white p-5 d-flex justify-content-center">
+                    <h5 class="mb-0">Detail Propietaire</h5> <span class="price">{{$proprietaire->prenom}} {{$proprietaire->nom}}</span>
                     <div class="mt-4">
-                        <div class="d-flex justify-content-between align-items-center"><span>All features</span> <span>1 Minute trigger</span>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>nom</span>
+                            <span>{{ $proprietaire->nom }}</span>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center"><span>5000 interactions</span>
-                            <span>Remove branding</span></div>
-                        <div class="d-flex justify-content-between align-items-center"><span>15 bots</span> <span>Priority support</span>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>prenom</span>
+                            <span>{{ $proprietaire->prenom }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>sexe</span>
+                            <span>{{ $proprietaire->sexe }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>CNI</span>
+                            <span>{{ $proprietaire->cni }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>telephone</span>
+                            <span>{{ $proprietaire->telephone }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Email</span>
+                            <span>{{ $proprietaire->email }}</span>
                         </div>
                     </div>
-                    <div class="mt-4">
-                        <button class="btn btn-danger">Start Free</button>
-                    </div>
+{{--                    <div class="mt-4">--}}
+{{--                        <a  href="" class="btn btn-danger">Contacter</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
+            <div class="">
+                <div class="card p-3">
                     <div class="d-flex flex-column">
-                        <div class="pricing-1 d-flex justify-content-between">
-                            <div><span class="d-block">Add 5 bots or active flow</span> <span class="font-weight-bold">+ $10/month</span>
+                        <div class="pricing-1 bg-secondary d-flex justify-content-between">
+                            <div><span class="d-block">Propriete</span> <span class="font-weight-bold">+ $10/month</span>
                             </div>
                             <div class="circle"><span></span> <span></span> <span></span> <span></span></div>
                         </div>
                         <div class="pricing-1 d-flex justify-content-between">
-                            <div><span class="d-block">Add 8 bots or active flow</span> <span class="font-weight-bold">+ $20/month</span>
+                            <div><span class="d-block">Propriete</span> <span class="font-weight-bold">+ $20/month</span>
                             </div>
                             <div class="circle"><span></span> <span></span> <span></span> <span></span></div>
                         </div>

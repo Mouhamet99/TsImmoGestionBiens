@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use function GuzzleHttp\Promise\all;
 
 class ProprietaireController extends Controller
@@ -29,6 +31,13 @@ class ProprietaireController extends Controller
      */
     public function create(): View
     {
+
+
+//        $role = Role::create(['name' => 'writer']);
+//        $permission = Permission::create(['name' => 'edit articles']);
+//        $role->givePermissionTo($permission);
+//        $permission->assignRole($role);
+
         return view('proprietaires.create', [
             'type_contrats' => TypeContrat::all()
         ]);

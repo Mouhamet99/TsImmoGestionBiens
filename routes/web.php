@@ -29,6 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('proprietaires', ProprietaireController::class);
     Route::resource('proprietes', ProprieteController::class);
 
+    Route::middleware(['role:admin'])->group(function () {
+        Route::put('/proprietes/{id}', [ProprieteController::class, 'delete']);
+        Route::put('/proprietaires/{id}', [ProprietaireController::class, 'delete']);
+    });
+
     Route::withoutMiddleware('auth')->group(function () {
         Route::get('/proprietes', [ProprieteController::class, 'index']);
         Route::get('/proprietaires', [ProprietaireController::class, 'index']);

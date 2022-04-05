@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProprietaireController;
 use App\Http\Controllers\ProprieteController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/proprietes', [ProprieteController::class, 'index']);
         Route::get('/proprietaires', [ProprietaireController::class, 'index']);
     });
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });

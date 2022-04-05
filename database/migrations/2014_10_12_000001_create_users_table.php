@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('profil')->nullable(false)->default('anonymous');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('agence_id')->constrained('agences');
+            $table->foreignId('agence_id')->default(1)->constrained('agences');
 
         });
     }

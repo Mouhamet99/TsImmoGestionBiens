@@ -7,14 +7,28 @@ use App\Models\Propriete;
 use App\Models\Quartier;
 use App\Models\TypePropriete;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProprieteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @return \Illuminate\Http\Response
      */
-    public function index()
+    function __construct()
+    {
+        $this->middleware('permission:propriete-list|propriete-create|propriete-edit|propriete-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:propriete-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:propriete-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:propriete-delete', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     */
+    public function index() : View
     {
 
         return view('proprietes.index', [
@@ -66,7 +80,7 @@ class ProprieteController extends Controller
      */
     public function show($id)
     {
-        return view('proprietes.show', ['propriete'=>Propriete::find($id)]);
+        return view('proprietes.show', ['propriete' => Propriete::find($id)]);
     }
 
     /**
@@ -121,7 +135,7 @@ class ProprieteController extends Controller
      */
     public function destroy($id)
     {
-         Propriete::destroy($id);
+        Propriete::destroy($id);
         return redirect('proprietes');
     }
 }

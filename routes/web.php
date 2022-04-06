@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProprietaireController;
 use App\Http\Controllers\ProprieteController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +26,24 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
-Route::resource('proprietaires', ProprietaireController::class);
-Route::resource('proprietes', ProprieteController::class);
+require __DIR__ . '/auth.php';
+
+Route::middleware('auth')->group(function () {
+    Route::resource('proprietaires', ProprietaireController::class);
+    Route::resource('proprietes', ProprieteController::class);
+
+    Route::middleware(['role:admin'])->group(function () {
+        Route::put('/proprietes/{id}', [ProprieteController::class, 'delete']);
+        Route::put('/proprietaires/{id}', [ProprietaireController::class, 'delete']);
+    });
+
+    Route::withoutMiddleware('auth')->group(function () {
+        Route::get('/proprietes', [ProprieteController::class, 'index']);
+        Route::get('/proprietaires', [ProprietaireController::class, 'index']);
+    });
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+});

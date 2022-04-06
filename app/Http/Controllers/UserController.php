@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
+use Spatie\Permission\PermissionRegistrar;
 
 class UserController extends Controller
 {
@@ -30,6 +33,8 @@ class UserController extends Controller
     public function create(): View
     {
         $roles = Role::pluck('name', 'name')->all();
+        dd(User::with('roles')->get());
+
         return view('users.create', compact('roles'));
     }
 
@@ -51,8 +56,29 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        //Asign role to user
+//        $user->assignRole($request->input('roles'));
+//        $permissions = Permission::pluck('id', 'id')->all();
+//        dd($permissions);
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
+        // create new permission
+//        Permission::create(['name' => 'role-list']);
+//        Permission::create(['name' => 'role-edit']);
+//        Permission::create(['name' => 'role-create']);
+//        Permission::create(['name' => 'role-delete']);
+
+        // create roles and assign existing permissions
+
+        // Asign rule to admin
+        $user->assignRole($role);
+        // Assign exist rule to user
+//        $role->givePermissionTo('role-edit');
+//        $users = User::role('Admin')->get()->first()->givePermissionTo('role-list');
+
+
+        // Get all rule assign to this user
+        dd($user->getRoleNames());
         return redirect()->route('users.index')
             ->with('success', 'User created successfully');
     }

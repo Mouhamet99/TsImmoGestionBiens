@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProprietaireController;
 use App\Http\Controllers\ProprieteController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +44,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('roles', \App\Http\Controllers\RoleController::class);
-    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });

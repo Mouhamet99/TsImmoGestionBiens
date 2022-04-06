@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.application')
 
 
 @section('content')
@@ -31,9 +31,11 @@
         <div class="form-group">
             <strong>Roles:</strong>
             @if(!empty($user->getRoleNames()))
-                @foreach($user->getRoleNames() as $v)
-                    <label class="badge badge-success">{{ $v }}</label>
+                @foreach($user->getRoleNames() as $key => $v)
+                    <label class="badge-success text-black">{{ $v }}</label>
                 @endforeach
+            @else
+                    <label class="badge-success">None</label>
             @endif
         </div>
     </div>

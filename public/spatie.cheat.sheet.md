@@ -21,6 +21,11 @@ Role::all()->pluck('name','id')
 ```php
   $user->getPermissionNames();
 ```
+### Get All permissions of a user
+
+```php
+$user->getAllPermissions();
+```
 
 ### Get the collections objects of permissions of a user
 
@@ -31,3 +36,18 @@ $user->permissions();
 ```php
 $user->getRoleNames();
 ```
+### Add Permission to a user
+```php
+$user->givePermissionTo($permission);
+```
+### Sync these 4 Permissions to that role having id=2
+```php
+$role = Role::find(2)
+$role->syncPermissions(["user-list",'user-create','user-edit','user-delete'])
+```
+### Create a new permision called <ins>user-list</ins>
+```php
+Permission::create(['name' => 'user-list']);
+```
+
+

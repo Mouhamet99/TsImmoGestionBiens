@@ -28,11 +28,11 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::resource('proprietaires', ProprietaireController::class);
     Route::resource('proprietes', ProprieteController::class);
 
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware(['auth', 'role:admin', 'role:superadmin'])->group(function () {
         Route::put('/proprietes/{id}', [ProprieteController::class, 'delete']);
         Route::put('/proprietaires/{id}', [ProprietaireController::class, 'delete']);
     });

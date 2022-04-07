@@ -49,5 +49,10 @@ $role->syncPermissions(["user-list",'user-create','user-edit','user-delete'])
 ```php
 Permission::create(['name' => 'user-list']);
 ```
+### superadmin role
+```php
+ $role = Spatie\Permission\Models\Role::find(2)->syncPermissions(["user-list",'user-create','user-edit','user-delete',"role-list",'role-create','role-edit','role-delete',"propriete-list",'propriete-create','p
+ropriete-edit','propriete-delete'])
+```
 
 

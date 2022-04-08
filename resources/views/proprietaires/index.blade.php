@@ -34,6 +34,14 @@
                         <a class="nav-link" href="{{ URL::to('proprietes/create') }}">Nouveau propriete</a>
                     </li>
                 </ul>
+                <div class="mr-auto text-white">{{ Auth::user()->name }}</div>
+                <!-- Authentication -->
+{{--                <form method="POST" action="{{ route('logout') }}">--}}
+{{--                    @csrf--}}
+{{--                </form>--}}
+                {{Form::open(['route'=>'logout','method' => 'POST','class'=>'d-inline'])}}
+                {{Form::submit('Deconnexion',['class'=>'btn btn-sm btn-danger'])}}
+                {{Form::close()}}
             </div>
         </div>
     </nav>

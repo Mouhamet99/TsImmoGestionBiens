@@ -45,7 +45,7 @@ $user->givePermissionTo($permission);
 $role = Role::find(2)
 $role->syncPermissions(["user-list",'user-create','user-edit','user-delete'])
 ```
-### Create a new permision called <ins>user-list</ins>
+### Create a new permision with name equal to <ins>user-list</ins>
 ```php
 Permission::create(['name' => 'user-list']);
 ```

@@ -28,11 +28,11 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::resource('proprietaires', ProprietaireController::class);
     Route::resource('proprietes', ProprieteController::class);
 
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware(['auth', 'role:admin', 'role:superadmin'])->group(function () {
         Route::put('/proprietes/{id}', [ProprieteController::class, 'delete']);
         Route::put('/proprietaires/{id}', [ProprietaireController::class, 'delete']);
     });
@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-});
+//Route::middleware(['auth'])->group(function () {
+    Route::resource('roles', RoleController::class)->middleware(['role:superadmin']);
+    Route::resource('users', UserController::class)->middleware(['role:admin']);
+//});

@@ -10,10 +10,6 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     */
     function __construct()
     {
         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
@@ -28,7 +24,7 @@ class RoleController extends Controller
      *
      * @return View
      */
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         dd(Role::all()->pluck('name'));
         $roles = Role::orderBy('id', 'DESC')->paginate(5);
@@ -41,7 +37,7 @@ class RoleController extends Controller
      *
      * @return View
      */
-    public function create() : View
+    public function create(): View
     {
         $permission = Permission::get();
         return view('roles.create', compact('permission'));

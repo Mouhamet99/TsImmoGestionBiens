@@ -46,15 +46,32 @@
                          name="password_confirmation" required/>
             </div>
 
+            <!-- Role -->
+            <div class="mt-4">
+                @if ($errors->has('role'))
+                    <span class="text-danger text-left">{{ $errors->first('role') }}</span>
+                @endif
+                <label for="role" class="block font-medium text-sm text-gray-700">Role</label>
+                <select name="role" id="role"
+                        class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full">
+                    @foreach($roles as $role)
+                        <option value={{$role}}>{{$role}}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <!-- Agence Id -->
             <div class="mt-4">
                 @if ($errors->has('agence_id'))
                     <span class="text-danger text-left">{{ $errors->first('agence_id') }}</span>
                 @endif
                 <label for="agence_id" class="block font-medium text-sm text-gray-700">Agence</label>
-                <select name="agence_id" id="agence_id">
-                    <option value="1">Agence 1</option>
-                    <option value="2">Agence 2</option>
+                <select name="agence_id" id="agence_id"
+                        class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full">
+
+                    @foreach($agences as $agence)
+                        <option value={{$agence->id}}>{{$agence->nom}}</option>
+                    @endforeach
                 </select>
             </div>
 

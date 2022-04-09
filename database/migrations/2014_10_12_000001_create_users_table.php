@@ -20,11 +20,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('sexe', ['m', 'f'])->default('m');
-            $table->string('profil')->nullable(false)->default('anonymous');
+            $table->string('role')->nullable(false)->default('anonymous');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('agence_id')->default(1)->constrained('agences');
-
+            $table->foreignId('agence_id')->constrained('agences');
         });
     }
 

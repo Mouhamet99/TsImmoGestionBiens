@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agence;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,8 +45,9 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        $roles = Role::pluck('name', 'name')->all();
-        return view('users.create', compact('roles'));
+        $roles = Role::pluck('name','name')->all();
+        $agences = Agence::all();
+        return view('users.create', compact('roles','agences'));
     }
 
     /**
@@ -68,7 +70,6 @@ class UserController extends Controller
         $user = User::create($input);
 
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-
 
         $user->assignRole($role);
 

@@ -43,7 +43,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class)->middleware(['role:admin']);
-});
+//Route::middleware(['auth'])->group(function () {
+    Route::resource('roles', RoleController::class)->middleware(['role:superadmin']);
+//    Route::resource('users', UserController::class)->middleware(['role:admin']);
+    Route::get('users/create', [UserController::class, 'create'])->withoutMiddleware(['auth', 'role:admin']);
+//});

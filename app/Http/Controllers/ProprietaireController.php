@@ -15,19 +15,24 @@ use function GuzzleHttp\Promise\all;
 
 class ProprietaireController extends Controller
 {
-     function __construct()
+    function __construct()
     {
         $this->middleware('permission:proprietaire-list|proprietaire-create|proprietaire-edit|proprietaire-delete', ['only' => ['index', 'store']]);
         $this->middleware('permission:proprietaire-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:proprietaire-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:proprietaire-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
      */
     public function index(): View
     {
+//        dd(auth()->user()->hasPermissionTo('role-list'));
+//        auth()->user()->hasPermissionTo('role-list');
+//        dd(auth()->user()->hasRole('superadmin'));
+//        dd(auth()->user()->can('proprietaire-list'));
         $proprietaires = Proprietaire::all();
         return view('proprietaires.index', ['proprietaires' => $proprietaires]);
     }

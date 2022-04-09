@@ -45,13 +45,17 @@ $user->givePermissionTo($permission);
 $role = Role::find(2)
 $role->syncPermissions(["user-list",'user-create','user-edit','user-delete'])
 ```
+### Create a new role with name equal to <ins>user-list</ins>
+```php
+Role::create(['name' => 'superadmin']);
+```
 ### Create a new permision with name equal to <ins>user-list</ins>
 ```php
 Permission::create(['name' => 'user-list']);
 ```
-### superadmin role
+### Sync rule to permession
 ```php
- $role = Spatie\Permission\Models\Role::find(2)->syncPermissions(["user-list",'user-create','user-edit','user-delete',"role-list",'role-create','role-edit','role-delete',"propriete-list",'propriete-create','p
+ Role::find(2)->syncPermissions(["user-list",'user-create','user-edit','user-delete',"role-list",'role-create','role-edit','role-delete',"propriete-list",'propriete-create','p
 ropriete-edit','propriete-delete'])
 ```
 

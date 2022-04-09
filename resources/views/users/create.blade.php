@@ -80,5 +80,5 @@
     {!! Form::close() !!}
 
 
-    <p class="text-center text-primary"><small>TS Immo</small></p>
+{{--    <p class="text-center text-primary"><small>TS Immo</small></p>--}}
 @endsection

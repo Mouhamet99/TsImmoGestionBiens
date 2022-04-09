@@ -36,9 +36,9 @@
                 </ul>
                 <div class="mr-auto text-white">{{ Auth::user()->name }}</div>
                 <!-- Authentication -->
-{{--                <form method="POST" action="{{ route('logout') }}">--}}
-{{--                    @csrf--}}
-{{--                </form>--}}
+                {{--                <form method="POST" action="{{ route('logout') }}">--}}
+                {{--                    @csrf--}}
+                {{--                </form>--}}
                 {{Form::open(['route'=>'logout','method' => 'POST','class'=>'d-inline'])}}
                 {{Form::submit('Deconnexion',['class'=>'btn btn-sm btn-danger'])}}
                 {{Form::close()}}
@@ -75,14 +75,21 @@
                 <td>{{ $value->telephone }}</td>
 
                 <!-- we will also add show, edit, and delete buttons -->
+                {{--                @hasanyrole('propriataire|admin|superadmin')--}}
                 <td class="text-center">
-
-                    <a class="btn btn-sm btn-info" href="{{ URL::to('proprietaires/' . $value->id) }}">Voir</a>
-                    <a class="btn btn-sm btn-warning" href="{{ URL::to('proprietaires/' . $value->id . '/edit') }}">Editer</a>
-                    {{Form::open(['url'=>'proprietaires/' . $value->id,'method' => 'delete','class'=>'d-inline'])}}
-                    {{Form::submit('Supprimer',['class'=>'btn btn-sm btn-danger'])}}
-                    {{Form::close()}}
+                    @can('proprietaire-list')
+                        <a class="btn btn-sm btn-info" href="{{ URL::to('proprietaires/' . $value->id) }}">Voir</a>
+                    @endcan
+                    @can('proprietaire-edit')
+                        <a class="btn btn-sm btn-warning" href="{{ URL::to('proprietaires/' . $value->id . '/edit') }}">Editer</a>
+                    @endcan
+                    @can('proprietaire-delete')
+                        {{Form::open(['url'=>'proprietaires/' . $value->id,'method' => 'delete','class'=>'d-inline'])}}
+                        {{Form::submit('Supprimer',['class'=>'btn btn-sm btn-danger'])}}
+                        {{Form::close()}}
+                    @endcan
                 </td>
+                {{--                @endhasanyrole--}}
             </tr>
         @endforeach
         </tbody>

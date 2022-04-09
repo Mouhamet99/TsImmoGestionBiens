@@ -1,9 +1,10 @@
 @extends('layouts.home')
+@section('title','Proprieataire')
+
 @section('content')
+
     <div class="container">
-
         <h1>Liste des proprietaires</h1>
-
         <!-- will be used to show any messages -->
         @if (Session::has('message'))
             <div class="alert alert-info">{{ Session::get('message') }}</div>

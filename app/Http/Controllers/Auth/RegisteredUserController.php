@@ -15,6 +15,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RegisteredUserController extends Controller
 {
@@ -50,6 +51,7 @@ class RegisteredUserController extends Controller
 
         $user = User::create($request->all());
 
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
         $user->assignRole($request->role);
 
         event(new Registered($user));

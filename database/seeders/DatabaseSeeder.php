@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         foreach($options as $key => $option){
         DB::table('type_proprietes')->insert([
             'libelle' => $option,
-            'created_At'=> now(),
-            'updated_At'=> now()
+            // 'created_At'=> now(),
+            // 'updated_At'=> now()
         ]);
     }
         $this->call([

@@ -67,11 +67,11 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
-        $user = User::create($input);
+        //$user = User::create($input);
 
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $user->assignRole($role);
+        $user->assignRole($roles);
 
         // Get all rule assign to this user
         return redirect()->route('users.index')

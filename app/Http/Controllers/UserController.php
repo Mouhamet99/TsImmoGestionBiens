@@ -60,18 +60,19 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+            'password' => ['required', 'same:confirm-password', Rules\Password::defaults()],
             'roles' => 'required'
         ]);
 
         $input = $request->all();
+        dd(var_dump($input['roles']));
         $input['password'] = Hash::make($input['password']);
 
-        //$user = User::create($input);
+        $user = User::create($input);
 
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $user->assignRole($roles);
+        $user->assignRole($input['roles']);
 
         // Get all rule assign to this user
         return redirect()->route('users.index')

@@ -44,6 +44,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ URL::to('proprietes/create') }}">Nouveau propriete</a>
                         </li>
+                        @hasanyrole('admin|superadmin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ URL::to('users/') }}">Utlisateurs</a>
+                        </li>
+                        @endhasanyrole
                     </ul>
                     <div class="mr-auto text-white mx-2">{{ Auth::user()->name }}</div>
                     <!-- Authentication -->

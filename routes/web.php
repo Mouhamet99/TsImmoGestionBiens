@@ -45,5 +45,5 @@ Route::middleware(['auth'])->group(function () {
 
 //Route::middleware(['auth'])->group(function () {
     Route::resource('roles', RoleController::class)->middleware(['role:superadmin']);
-    Route::resource('users', UserController::class)->middleware(['role:admin']);
+    Route::resource('users', UserController::class)->middleware([]);
 //});
